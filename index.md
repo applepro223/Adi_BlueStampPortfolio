@@ -9,7 +9,7 @@ You should comment out all portions of your portfolio that you have not complete
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-| Aditya B. | School Name | Electrical Engineering | Incoming Senior
+| Aditya (Adi) B. | BASIS Independent Silicon Valley | Mechanical Engineering | Incoming Freshman
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
@@ -60,14 +60,72 @@ Here's where you'll put images of your schematics. [Tinkercad](https://www.tinke
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
 ```c++
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+
+#define OLED_RESET 4
+
+#define sensor  A0
+
+int gasLevel  = 0;
+String quality ="";
+Adafruit_SSD1306 display(SCREEN_WIDTH,  SCREEN_HEIGHT, &Wire, OLED_RESET);
+
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println("Hello World!");
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println(F("Allocation failed, do better"));
+    for(;;);
+  }
+
+  
+  display.setTextSize(1.5);
+  display.setCursor(50,0);
+
+  display.clearDisplay();
+  printText();
+  delay(1500);
 }
+
+
+void air_sensor()
+{
+  gasLevel = analogRead(sensor);
+  quality = gasLevel;
+
+}
+
 
 void loop() {
   // put your main code here, to run repeatedly:
+  air_sensor();
+  display.display();
+  Serial.println(quality);
+  display.clearDisplay();
+  display.setTextColor(WHITE);// put your setup code here, to run once:
+  display.setTextSize(3);
+  display.setCursor(20, 23);
+  display.setFont();
+  display.println(quality);
+  display.display();
+  delay(1500);
+
+
+}
+
+void printText() {
+  display.clearDisplay();
+  display.setTextColor(WHITE);// put your setup code here, to run once:
+  display.setTextSize(3);
+  display.setCursor(20, 23);
+  display.setFont();
+  display.println(quality);
+  display.display();
 
 }
 ```
