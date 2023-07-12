@@ -39,7 +39,9 @@ For your second milestone, explain what you've worked on since your previous mil
 - Technical details of what you've accomplished and how they contribute to the final goal
 - What has been surprising about the project so far
 - Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
+- What needs to be completed before your final milestone
+
+My second milestone was getting the DHT11 sensor to work and put the reading on the OLED. I also wanted to move components from the large breadboard to the smaller breadboard, so that it would be more convenient to hang up. Both these goals have been achieved. A major challenge was that the sensor initially didn't work but that was resolved. A modification I want to make is adding an IR sensor so that the monitor can be remote controlled. One of the last things to complete as well is an exterior shell so that it looks somewhat attractive. 
 
 # First Milestone
 
@@ -53,6 +55,8 @@ For your first milestone, describe what your project is and how you plan to buil
 - Challenges you're facing and solving in your future milestones
 - What your plan is to complete your project
 
+My project is an air quality monitor with a temperature and humidity sesnor. My first milestone was to get data from the MQ135 sensr and present it on the OLED. After a few tries and some code editing, I finally managed to achieve this. Through the code editing, I was also able to make the data go to the serial monitor as well, in case the OLED malfunctions. My next milestone is to get the humidity and temperature senor connected and presenting the data on the OLED as well. So far, one of my challenges has been figuring out the safe ranges of the MQ135 sensor as it isn't a traditional AQI sensor. I will try and research as much as possible to figure this out and present that on the OLED. 
+
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
@@ -64,7 +68,9 @@ Here's where you'll put your code. The syntax below places it into a block of co
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <dht11.h>
 
+#define DHT11PIN 4
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 
@@ -75,6 +81,7 @@ Here's where you'll put your code. The syntax below places it into a block of co
 int gasLevel  = 0;
 String quality ="";
 Adafruit_SSD1306 display(SCREEN_WIDTH,  SCREEN_HEIGHT, &Wire, OLED_RESET);
+dht11 DHT11;
 
 void setup() {
   Serial.begin(9600);
@@ -88,7 +95,6 @@ void setup() {
   display.setCursor(50,0);
 
   display.clearDisplay();
-  printText();
   delay(1500);
 }
 
@@ -98,36 +104,45 @@ void air_sensor()
   gasLevel = analogRead(sensor);
   quality = gasLevel;
 
+  display.setTextColor(WHITE);
+  display.setTextSize(1);  
+  display.setCursor(1,7);
+  display.setFont();
+  display.println("Air Quality:");
+  display.setTextSize(1);
+  display.setCursor(20,23);
+  display.setTextSize(1.5);
+  display.println(quality); 
+
 }
 
 
 void loop() {
   // put your main code here, to run repeatedly:
-  air_sensor();
-  display.display();
-  Serial.println(quality);
   display.clearDisplay();
-  display.setTextColor(WHITE);// put your setup code here, to run once:
-  display.setTextSize(3);
-  display.setCursor(20, 23);
-  display.setFont();
-  display.println(quality);
+  air_sensor();
+  Serial.println(quality);
+  Serial.println();
+  int chk = DHT11.read(DHT11PIN);
+  Serial.print("Humidity (%): ");
+  display.setCursor(7,48);
+  display.println("Humidity:");
+  display.setCursor(80, 48);
+  display.print((float)DHT11.humidity, 2);
+  Serial.println((float)DHT11.humidity, 2);
+  display.setTextSize(0.1);
+  display.setCursor(7,57);
+  display.println("Temperature:");
+  display.setCursor(80,57);
+  display.print((float)DHT11.temperature, 2);
+  Serial.print("Temperature  (C): ");
+  Serial.println((float)DHT11.temperature, 2);
   display.display();
   delay(1500);
 
-
 }
 
-void printText() {
-  display.clearDisplay();
-  display.setTextColor(WHITE);// put your setup code here, to run once:
-  display.setTextSize(3);
-  display.setCursor(20, 23);
-  display.setFont();
-  display.println(quality);
-  display.display();
 
-}
 ```
 
 # Bill of Materials
