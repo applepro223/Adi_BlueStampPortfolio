@@ -70,7 +70,7 @@ My project is an air quality monitor with a temperature and humidity sesnor. My 
 
 # Schematics 
 
-![Headstone Image](Screenshot 2023-07-20 at 1.34.52 PM.png)
+![Headstone Image](Screenshot_2023-07-20_at_1.34.52_PM.png)
 
 # Code
 ```Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
