@@ -1,4 +1,4 @@
-# Arduino Air Quality Monitor
+# Air Quality Monitor
 
 My project is an air quality monitor. This is inspired by not only the New York-Canada smoky skies, but also the 2020 Northern California fires which caused similar results. My biggest challenge was making multiple pieces of code work together cohesively and make a working project. It was a very fun project to make, as it also involved a lot of building (something that I really enjoy). The point of this project is that it can be used everyday, and can be very important in an emergency.
 
