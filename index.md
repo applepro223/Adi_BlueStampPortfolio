@@ -41,6 +41,7 @@ My project is an air quality monitor with a temperature and humidity sesnor. My 
 # Schematics 
 
 ![Headstone Image](BSESchematic2.png)
+Schematic by author using Tinkercad
 
 # Code
 The following code is c++
@@ -52,20 +53,22 @@ The following code is c++
 #include <Adafruit_SSD1306.h>
 #include <dht11.h>
 
+//the above code includes libraries for the code to run
 
 
 #define DHT11PIN 4
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
-
 #define OLED_RESET 4
-
 #define sensor  A0
+
+//defines boundaries of circuit
 
 int gasLevel  = 0;
 String quality ="";
 Adafruit_SSD1306 display(SCREEN_WIDTH,  SCREEN_HEIGHT, &Wire, OLED_RESET);
 dht11 DHT11;
+
 
 void setup() {
   Serial.begin(9600);
@@ -82,6 +85,7 @@ void setup() {
   delay(1500);
 }
 
+//sets up display and gets the circuit ready to read
 
 void air_sensor()
 {
@@ -99,6 +103,8 @@ void air_sensor()
   display.println(quality); 
 
 }
+
+//the code for the MQ135
 
 
 void loop() {
@@ -125,22 +131,18 @@ void loop() {
   delay(1500);
 
 }
+
+//Repeatedly prints humidity, temperature, and PPM air quality on both the OLED and the Serial monitor
+
 ```
 
-# Bill of Materials
-Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
-Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
+# Core Components
+
+*Note: the enclosure is made from an old phone box*
 
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-
-# Other Resources/Examples
-One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
-- [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
-- [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
-- [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
-
-To watch the BSE tutorial on how to create a portfolio, click here.
+| MQ135 sensor | Used to detect air quality | $9 | <a href="https://a.co/d/aQV4mxh"> Amazon </a> |
+| ELEGOO Uno R3 | Main circuit board for code | $30 | <a href="https://a.co/d/bVRa9SX"> Amazon </a> |
+| DHT11 sensor | Temp. and Humidity sensor | $8 | <a href="https://a.co/d/cUyI2lm"> Amazon </a> |
+| SSD1306 OLED Display | Displays info | $9 | <a href="https://a.co/d/55TlV21"> Amazon </a> |
