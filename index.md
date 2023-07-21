@@ -46,9 +46,9 @@ My project is an air quality monitor with a temperature and humidity sesnor. My 
 ![Headstone Image](BSESchematics.png)
 
 # Code
+The following code is c++
 
-
-```c++
+```
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -73,7 +73,7 @@ dht11 DHT11;
 void setup() {
   Serial.begin(9600);
   if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Serial.println(F("Allocation failed, do better"));
+    Serial.println(F("Allocation failed, check circuit and code"));
     for(;;);
   }
 
@@ -129,7 +129,7 @@ void loop() {
 
 }
 
-```
+
 
 # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
