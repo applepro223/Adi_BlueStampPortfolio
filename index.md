@@ -39,12 +39,12 @@ My project is an air quality monitor with a temperature and humidity sesnor. My 
 
 # Schematics 
 
-![Headstone Image](BSESchematics.png)
+![Headstone Image](BSESchematic2.png)
 
 # Code
 The following code is c++
 
-```
+```c++
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -124,8 +124,7 @@ void loop() {
   delay(1500);
 
 }
-
-
+```
 
 # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
