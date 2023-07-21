@@ -4,6 +4,7 @@ My project is an air quality monitor. This is inspired by not only the New York-
 
 
 
+
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
 | Aditya B. | BASIS Independent Silicon Valley | Mechanical Engineering | Incoming Freshman
